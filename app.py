@@ -56,6 +56,7 @@ def add_gym_ui_theme():
             border-radius: 8px;
             padding: 6px;
         }
+        
         </style>
     """, unsafe_allow_html=True)
 
@@ -67,12 +68,12 @@ GEMINI_API_KEY = "AIzaSyAgv6bVBWBccxuosY9DxNqo2eIFfBhfArw"
 genai.configure(api_key=GEMINI_API_KEY)
 
 # --- Page Configuration ---
-st.set_page_config(
-    page_title="Personal AI Workout Coach",
-    page_icon="💪",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+#st.set_page_config(
+ #   page_title="Personal AI Workout Coach",
+   # page_icon="💪",
+  #  layout="wide",
+    #initial_sidebar_state="expanded"
+#)
 
 # --- Helper Function to Parse AI Output ---
 def parse_workout_plan(ai_output, num_days):
@@ -131,7 +132,7 @@ def generate_workout_with_gemini(fitness_goal, gender, available_equipment, work
         return None
 
 # --- Main App Title and Description ---
-st.title("🏋️‍♂️ Your AI-Powered Workout Coach 🏋️‍♀️")
+st.title("🏋️‍♂️Your AI-Powered Workout Coach🏋️‍♀️")
 st.markdown("Craft personalized workout routines tailored to your goals, gender, and available equipment.")
 
 # --- User Inputs in Sidebar ---
@@ -319,7 +320,7 @@ else:
     # Display the image from disk if present, else from session state
     pic_exists = os.path.exists(file_path)
     if pic_exists:
-        st.image(file_path, caption=f"Progress Pic for {selected_date}", use_container_width=True)
+        st.image(file_path, caption=f"Progress Pic for {selected_date}")
         # --- Delete button for this date's pic ---
         if st.button(f"🗑️ Delete Progress Pic for {selected_date}"):
             os.remove(file_path)
@@ -355,7 +356,7 @@ else:
     for idx, img_path in enumerate(image_files):
         date_str = os.path.splitext(os.path.basename(img_path))[0]
         with cols[idx % 4]:
-            st.image(img_path, caption=f"{date_str}", use_container_width=True)
+            st.image(img_path, caption=f"{date_str}")
             if st.button(f"🗑️ Delete ({date_str})", key=f"delete_{date_str}"):
                 os.remove(img_path)
                 st.session_state.progress_pics.pop(date_str, None)
